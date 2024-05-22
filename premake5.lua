@@ -13,6 +13,7 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 -- Include directories relative to root folder {solution directory}
 IncludeDir = {}
+IncludeDir["Vulkan"] = "EasyVulkan/vendor/Vulkan/Include"
 IncludeDir["GLFW"] = "EasyVulkan/vendor/GLFW/include"
 IncludeDir["glm"] = "EasyVulkan/vendor/glm"
 IncludeDir["stb_image"] = "EasyVulkan/vendor/stb_image"
@@ -23,7 +24,7 @@ project "EasyVulkan"
     location "EasyVulkan"
     kind "ConsoleApp"
     language "C++"
-    cppdialect "C++17"
+    cppdialect "C++20"
     staticruntime "off"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
@@ -42,13 +43,20 @@ project "EasyVulkan"
     includedirs
     {
         "Hazel/src",
+        "%{IncludeDir.Vulkan}",
         "%{IncludeDir.GLFW}",
         "%{IncludeDir.glm}",
         "%{IncludeDir.stb_image}"
     }
 
+    libdirs
+    {
+        "EasyVulkan/vendor/Vulkan/Lib"
+    }
+
     links
     {
+        "vulkan-1",
         "GLFW"
     }
 

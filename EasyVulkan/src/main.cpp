@@ -1,6 +1,17 @@
-#include <iostream>
+#include "GlfwGeneral.hpp"
 
-void main()
+int main()
 {
-	std::cout << "hello";
+    if (!InitializeWindow({ 1920, 1080 }))
+        return -1;
+    while (!glfwWindowShouldClose(pWindow)) {
+
+        
+
+        glfwPollEvents();
+        TitleFps();
+    }
+    TerminateWindow();
+
+	return 0;
 }
